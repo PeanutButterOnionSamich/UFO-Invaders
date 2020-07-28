@@ -1,48 +1,30 @@
-import {getEarth} from './objects/earth.js';
-import {getSky} from './objects/sky.js'; 
-import {stats} from './objects/stats.js'; 
+import { getGame } from './control/game.js';
+import { drawGame } from './control/draw.js';
+import { updateGame } from './control/update.js';
+import {keyDown, keyUp} from './control/events.js';
+                
 
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
-var infoCenter = document.getElementById("infoCenter");
-var info = infoCenter.getContext("2d");
-var earth = getEarth(canvas);
-var sky = getSky(canvas);
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
 
-function displayScore(stats) {
-    info.font = "16px Arial";
-    info.fillStyle = "#ffffff";
-    info.fillText("Score: " + stats.score + "          Abductions: " + stats.abductions +
-        "          Aliens Landed: " + stats.visitors, 8, 20);
+function keyDownHandler(e) {
+    keyDown(game, e);
 }
 
-function drawEarth(earth) {
-    ctx.beginPath();
-    ctx.rect(earth.x, earth.y, earth.width, earth.height);
-    ctx.fillStyle = earth.color;
-    ctx.fill();
-    ctx.closePath();
+function keyUpHandler(e) {
+    keyUp(game, e); 
 }
 
-function drawSky(sky) {
-    ctx.beginPath();
-    ctx.rect(sky.x, sky.y, sky.width, sky.height);
-    ctx.fillStyle = sky.color;
-    ctx.fill();
-    ctx.closePath();
-}
+var game = getGame();
 
 function draw() {
-    if (stats.endOfGame) {
+    if (game.gameOver) {
         clearInterval(refreshInterval);
     } else {
-        info.clearRect(0, 0, canvas.width, canvas.height);
-        displayScore(stats);
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawEarth(earth);
-        drawSky(sky);
+        updateGame(game);
+        drawGame(game)
     }
+
 }
 
 var refreshInterval = setInterval(draw, 10);
