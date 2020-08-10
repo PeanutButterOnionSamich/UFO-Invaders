@@ -1,7 +1,9 @@
-import {updateufos} from '../objects/ufo.js';
+import {updateUfos} from '../objects/ufo.js';
 import { updateDefender } from '../objects/defender.js';
+import { updateMissiles } from '../objects/missile.js';
 
 export function updateGame(game) {
-    updateufos(game.ufos);
+    updateUfos(game);
     updateDefender(game);
+    updateMissiles(game);
 }

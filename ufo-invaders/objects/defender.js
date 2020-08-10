@@ -10,11 +10,11 @@ export function updateDefender(game) {
     var defender = game.defender;
     var buffer = 8
 
-        if (game.events.rightPressed && defender.x <= defender.maxRight - buffer) {
-            defender.x = defender.x + game.defender.speedX;
-        }
-        if (game.events.leftPressed && defender.x >= defender.maxLeft + buffer) {
-            defender.x = defender.x - game.defender.speedX;
-        }
+    if (game.events.rightPressed && defender.x <= defender.maxRight - buffer) {
+        defender.x = defender.x + defender.speedX;
     }
+    if (game.events.leftPressed && defender.x >= defender.maxLeft + buffer) {
+        defender.x = defender.x -defender.speedX;
+    }
+}
 

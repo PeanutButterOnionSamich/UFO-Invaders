@@ -1,7 +1,7 @@
 
 export function getufos(canvas, startx, starty) {
 
-    var ufos = new Array(25);
+    var ufos = new Array(5);
     for (var i = 0; i < ufos.length; i++) {
         ufos[i] = getufo(canvas, startx, starty);
     }
@@ -12,18 +12,19 @@ function getufo(canvas, startx, starty) {
 
     return {
         type: "rectangle",
-        x: startx, y: starty, width: 30, height: 10, speedX: 5, speedY: 5, color: '#3b3737',
+        x: startx, y: starty, width: 20, height: 5, speedX: 5, speedY: 5, color: '#211a1a',
         maxLeft: 0, maxRight: canvas.width - 20, maxTop: 0,
         maxDown: canvas.height - 220, timer: Date.now() + 1000
     };
 }
-export function updateufos(ufos) {
+export function updateUfos(game) {
 
+    removeHitUfos(game);
 
-    for (var i = 0; i < ufos.length; i++) {
-        var ufo = ufos[i];
-        var xbuffer = 8
-        var ybuffer = 10
+    for (var i = 0; i < game.ufos.length; i++) {
+        var ufo = game.ufos[i];
+        var xbuffer = 11
+        var ybuffer = 12
 
         if (Date.now() > ufo.timer) {
             randomize(ufo);
@@ -41,6 +42,20 @@ export function updateufos(ufos) {
     }
 }
 
+function removeHitUfos(game) {
+    var ufos = game.ufos;
+    var liveUfos = [];
+    var missiles = game.missiles;
+    var liveMissiles = []; 
+
+    for (var i = 0; i < ufos.length; i++) {
+        for (var j = 0; j < missiles.length; j++) {
+            console.log("i=" + i + " j=" + j);
+        }  
+    }
+
+
+}
 function randomize(ufo) {
     ufo.speedX = (Math.floor(Math.random() * 90) - 45) / 10;
     ufo.speedY = (Math.floor(Math.random() * 90) - 45) / 10;

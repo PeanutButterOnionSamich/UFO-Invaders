@@ -8,6 +8,7 @@ function drawObjects(game) {
     drawObject(game.ctx, game.sky);
     drawufos(game.ctx, game.ufos);
     drawObject(game.ctx, game.defender);
+    drawMissiles(game.ctx, game.missiles); 
 }
 
 function drawufos(ctx, ufos) {
@@ -16,6 +17,14 @@ function drawufos(ctx, ufos) {
         drawObject(ctx, ufo);
     }
 }
+function drawMissiles(ctx, missiles) {
+    for (var i = 0; i < missiles.length; i++) {
+        var missile = missiles[i];
+        drawObject(ctx, missile);
+    }
+}
+
+
 function drawObject(ctx, object) {
     ctx.beginPath();
     ctx.rect(object.x, object.y, object.width, object.height);
